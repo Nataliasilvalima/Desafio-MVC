@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout"
+layout:decorate="~{layout.html}"
+>
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${ #lists.isEmpty(lista)}">
+		Nenhuma Atividade encontrada.
+	</div>
+	<nav class="navbar navbar-dark bg-dark">
+	</nav>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Filtrar Atividade</p>
+		</div>
+		<div class="card-body">
+			<form method="GET">
+				<div class="form-group mb-3">
+						<label for="nome">Nome</label> <input class="form-control"
+							type="text" name="nome" th:value="${nome}"></input>
+							</div>
+					<button type="submit" class="btn btn-primary">Pesquisar
+						Atividade</button>
+			</form>
+	</div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Data Inicio</th>
+					<th>Data Entrega</th>
+					<th>Evento</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each ="atividade: ${lista}">
+					<td th:text="${atividade.id}" ></td>
+					<td th:text="${atividade.nome}"></td>
+					<td th:text="${#dates.format(atividade.inicio, 'dd/MM/yyyy')}" ></td>
+					<td th:text="${#dates.format(atividade.entrega, 'dd/MM/yyyy')}" ></td>
+					<td th:each="eventos :${atividade.eventos}"
+                    	 th:text="${eventos.nome}"></td>
+      					<td>
+      					<a class="btn btn-primary btn-sm" th:href="@{/atividade/novo(id=${atividade.id})}">Editar</a>
+						<a class="btn btn-primary btn-sm" th:href="@{/atividade/excluir(id=${atividade.id})}" onclick="return confirm('Você realmente deseja excluir essa atividade?')">Excluir</a>
+						</td>				
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+</html>

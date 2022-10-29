@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout">
+<meta charset="Utf-8">
+<body bgcolor="sky blue">
+
+</body>
+<h2 class="text-primary text-center font-weight-bold">Tabela de
+	pontuação</h2>
+<table border="1" class="table table-striped ">
+	<thead class="thead-dark">
+		<tr>
+			<th class="table-warning" scope="row" colspan="2">GFT MILHAS</th>
+		</tr>
+		<tr>
+			<th class="w-50 p-3" scope="col">Criterio</th>
+			<th class="w-50 p-3" scope="col">Pontuação por grupo</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td scope="row">Presença</td>
+			<td>10</td>
+		<tr>
+			<td scope="row">Atividade</td>
+			<td>5</td>
+		<tr>
+			<td scope="row">Atraso</td>
+			<td>-2</td>
+		<tr>
+			<td scope="row">Bônus 100% presença</td>
+			<td>5</td>
+		<tr>
+			<td scope="row">Bônus 100% atividade</td>
+			<td>3</td>
+		</tr>
+	</tbody>
+</table>
+<p></p>
+<a class="btn btn-primary btn-sm" th:href="@{/index}">Voltar</a>
+</html>

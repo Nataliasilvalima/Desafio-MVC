@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<nav class="navbar navbar-dark bg-dark"></nav>
+	<div class="alert alert-primary" th:if="${mensagem !=null}"
+		th:text="${mensagem}"></div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Novo Evento</p>
+		</div>
+		<div class="card-body">
+			<form method="POST" th:object="${evento}" th:action="@{/evento/novo}">
+				<!-- apos alterar o objeto ele vai para a pagina novo -->
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group mb-3">
+					<label for="nome">Nome</label> <input class="form-control"
+						type="text" th:field="*{nome}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="inicio">Data Inicio</label> <input class="form-control"
+						type="text" id="_inicio"></input> <input type="hidden"
+						th:field="*{inicio}"></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('inicio')}"
+						th:errors="*{inicio}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="finall">Data Final</label> <input class="form-control"
+						type="text" id="_finall"></input> <input type="hidden"
+						th:field="*{finall}"></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('finall')}"
+						th:errors="*{finall}"></div>
+				</div>
+				<button type="submit" class="btn btn-primary">Salvar Evento</button>
+			</form>
+		</div>
+	</div>
+</div>
+<div layout:fragment="scripts">
+	<script>
+		$(function() {
+			$("#_inicio").datepicker({
+				dateFormat : "dd/mm/yy",
+				altFormat : "yy-mm-dd",
+				altField : "#inicio"
+			});
+			$("#_finall").datepicker({
+				dateFormat : "dd/mm/yy",
+				altFormat : "yy-mm-dd",
+				altField : "#finall"
+			});
+		});
+	</script>
+</div>
+</html>

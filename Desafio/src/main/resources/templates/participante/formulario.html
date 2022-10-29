@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="utf-8">
+<div layout:fragment="content">
+	<nav class="navbar navbar-dark bg-dark"></nav>
+	<div class="alert alert-primary" th:if="${mensagem !=null}"
+		th:text="${mensagem}">
+	</div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Novo Participante</p>
+		</div>
+		<div class="card-body">
+			<form method="POST" th:object="${participante}"
+				th:action="@{/participante/novo}">
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group mb-3">
+					<label for="nome">Nome</label> <input class="form-control"
+						type="text" th:field="*{nome}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="quatroLetras">4 Letras:</label> <input
+						class="form-control" type="text" th:field="*{quatroLetras}"
+						required></input>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('quatroLetras')}"
+						th:errors="*{quatroLetras}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nivel">Nivel</label> <input class="form-control"
+						type="text" th:field="*{nivel}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('nivel')}"
+						th:errors="*{nivel}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="email">E-mail</label> <input class="form-control"
+						type="text" th:field="*{email}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('email')}"
+						th:errors="*{email}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="grupos">Grupo</label> <select class="form-select"
+						th:field="*{grupos}">
+						<option th:each="grupos: ${listaGrupos}" th:value="${grupos.id}"
+							th:text="${grupos.nome}" />
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary">Salvar
+					Participante</button>
+			</form>
+		</div>
+	</div>
+</div>
+</html>

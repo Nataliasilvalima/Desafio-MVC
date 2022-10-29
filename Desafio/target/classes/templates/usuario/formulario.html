@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="utf-8">
+<div layout:fragment="content">
+	<nav class="navbar navbar-dark bg-dark">
+	</nav>
+	<div class="alert alert-primary" th:if="${mensagem !=null}"
+		th:text="${mensagem}">
+	</div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Novo usuario</p>
+		</div>
+		<div class="card-body">
+			<form method="POST" th:object="${usuario}"
+				th:action="@{/usuario/novo}">
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group mb-3">
+					<label for="nome">Nome</label> <input class="form-control"
+						type="text" th:field="*{nome}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="nome">4 Letras</label> <input class="form-control"
+						type="text" th:field="*{quatroLetras}" required></input>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('quatroLetras')}"
+						th:errors="*{quatroLetras}"></div>
+					<div class="form-group mb-3">
+						<label for="nome">E-mail</label> <input class="form-control"
+							type="text" th:field="*{email}" required></input>
+						<div class="text-danger" th:if="${#fields.hasErrors('email')}"
+							th:errors="*{email}"></div>
+					</div>
+					<div class="form-group mb-3">
+						<label for="senha">Senha</label> <input class="form-control"
+							type="text" th:field="*{senha}" required></input>
+						<div class="text-danger" th:if="${#fields.hasErrors('senha')}"
+							th:errors="*{senha}"></div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Salvar
+					Usuario</button>
+					
+				<!-- cria um botao de direcionamento -->
+			</form>
+		</div>
+	</div>
+</div>
+</html>

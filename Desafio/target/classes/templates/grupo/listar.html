@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${ #lists.isEmpty(lista)}">
+		Nenhum Grupo encontrado.</div>
+	<nav class="navbar navbar-dark bg-dark"></nav>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Filtrar Grupo</p>
+		</div>
+		<div class="card-body">
+			<form method="GET">
+				<div class="form-group mb-3">
+					<label for="nome">Nome:</label> <input class="form-control"
+						type="text" name="nome" th:value="${nome}"></input>
+				</div>
+				<button type="submit" class="btn btn-primary">Pesquisar
+					Grupo</button>
+			</form>
+		</div>
+		<div th:if="${not #lists.isEmpty(lista)}">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>Quantidade de Pessoas</th>
+						<th>Eventos</th>
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="grupo: ${lista}">
+						<td th:text="${grupo.id}"></td>
+						<td th:text="${grupo.nome}"></td>
+						<td th:text="${(grupo.qntPessoas)}"></td>
+						<td th:text="${(grupo.eventos.nome)}"></td>
+						<td><a class="btn btn-primary btn-sm"
+							th:href="@{/grupo/novo(id=${grupo.id})}">Editar</a> <a
+							class="btn btn-primary btn-sm"
+							th:href="@{/grupo/excluir(id=${grupo.id})}"
+							onclick="return confirm('Você realmente deseja excluir esse grupo?')">Excluir</a>
+						</td>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout"
+layout:decorate="~{layout.html}"
+>
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${ #lists.isEmpty(lista)}">
+		Nenhum Participante encontrado.
+	</div>
+	<nav class="navbar navbar-dark bg-dark">
+	</nav>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Filtrar Participante</p>
+		</div>
+		<div class="card-body">
+			<form method="GET">
+				<div class="form-group mb-3">
+						<label for="nome">Nome:</label> <input class="form-control"
+							type="text" name="nome" th:value="${nome}"></input>
+					</div>
+						<div class="form-group mb-3">
+						<label for="quatroLetras">4 Letras:</label> <input class="form-control"
+							type="text" name="quatroLetras" th:value="${quatroLetras}"></input>
+					</div>
+					<button type="submit" class="btn btn-primary">Pesquisar
+						Participante</button>
+			</form>
+	</div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>4 Letras</th>
+					<th>E-mail</th>
+					<th>Nivel</th>
+					<th>Grupo</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody><!-- corpo da tabela -->
+				<tr th:each ="participante: ${lista}">
+					<td th:text="${participante.id}" ></td>
+					<td th:text="${participante.nome}"></td><!-- width configura o tamanho do objeto no card -->
+					<td th:text="${participante.quatroLetras}" ></td>
+					<td th:text="${participante.email}" ></td>
+					<td th:text="${participante.nivel}" ></td>
+					<td th:text="${participante.grupos.nome}" ></td>
+					<td>
+					<a class="btn btn-primary btn-sm" th:href="@{/participante/detalhe(id=${participante.id})}">Atividades</a>
+					<a class="btn btn-primary btn-sm" th:href="@{/participante/novo(id=${participante.id})}">Editar</a>
+					<a class="btn btn-primary btn-sm" th:href="@{/participante/excluir(id=${participante.id})}" onclick="return confirm('Você realmente deseja excluir esse participante?')">Excluir</a>
+					</td>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+</html>

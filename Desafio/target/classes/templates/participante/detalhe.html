@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+<div class="alert alert-primary" th:if="${ #lists.isEmpty(lista)}">
+		Nenhuma lista encontrada.
+	</div>
+
+	<nav class="navbar navbar-dark bg-dark"></nav>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Atividades do Participante</p>
+		</div>
+		<div th:if="${not #lists.isEmpty(lista)}">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="atividades:${lista}">
+						<td th:text="${atividades.id}"width="5%"></td>
+						<td th:text="${atividades.nome}"></td>
+					</tr>
+					<td >
+					<a class="btn btn-primary btn-sm" th:href="@{/participante}">Voltar</a>
+				</td>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${ #lists.isEmpty(lista)}">
+		Nenhum Evento encontrado.</div>
+	<nav class="navbar navbar-dark bg-dark"></nav>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Eventos</p>
+		</div>
+		<div th:if="${not #lists.isEmpty(lista)}">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>Data Inicio</th>
+						<th>Data Final</th>
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="evento: ${lista}">
+						<td th:text="${evento.id}"></td>
+						<td th:text="${evento.nome}"></td>
+						<td th:text="${#dates.format(evento.inicio, 'dd/MM/yyyy')}"></td>
+						<td th:text="${#dates.format(evento.finall, 'dd/MM/yyyy')}"></td>
+						<td><a class="btn btn-primary btn-sm"
+							th:href="@{/evento/detalhe(id=${evento.id})}">Detalhes</a> <a
+							class="btn btn-primary btn-sm"
+							th:href="@{/evento/novo(id=${evento.id})}">Editar</a> <a
+							class="btn btn-primary btn-sm"
+							th:href="@{/evento/excluir(id=${evento.id})}"
+							onclick="return confirm('Você realmente deseja excluir esse evento?')">Excluir</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</html>
